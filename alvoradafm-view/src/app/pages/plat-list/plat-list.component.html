@@ -1,0 +1,76 @@
+<div class="player-app">
+  <div class="backdrop-overlay" [class.visible]="isPlaylistOpen" (click)="togglePlaylist()"></div>
+
+  <h2>Mixer & Visualizer</h2>
+
+  <button class="toggle-btn" (click)="togglePlaylist()">
+    {{ isPlaylistOpen ? '✕ Fechar' : '☰ Playlist' }}
+  </button>
+
+  <canvas #canvas width="600" height="150" class="visualizer"></canvas>
+
+  <div class="progress-container">
+    <div class="progress-bar" [style.width.%]="progress"></div>
+  </div>
+
+  <div class="player-card">
+    @if (songs[currentIndex]) {
+    <div class="current-info">
+      <img [src]="getAlbumArt(songs[currentIndex])" class="album-cover">
+      <h3>{{ songs[currentIndex].title || songs[currentIndex].filename }}</h3>
+      <p>{{ songs[currentIndex].artist }}</p>
+    </div>
+    }
+<!--
+    <div class="current-track" *ngIf="songs[currentIndex]">
+      <img [src]="getAlbumArt(songs[currentIndex])" class="main-cover">
+      <h2>{{ songs[currentIndex].title || 'Sem Título' }}</h2>
+    </div>
+-->
+    <!-- Visualizador e Controles aqui... -->
+    <div class="controls-panel">
+      <!--
+      <div class="setting-row">
+        <label>Crossfade: <b>{{ crossfadeSeconds }}s</b></label>
+        <input type="range" min="0" max="15" [(ngModel)]="crossfadeSeconds">
+      </div>
+-->
+      <div class="btn-group">
+        <button (click)="playPlaylist(0)">PLAY</button>
+        <button (click)="nextWithTransition()">PRÓXIMA</button>
+        <button (click)="restart()">REINICIAR</button>
+        <button (click)="stop()" class="btn-stop">STOP</button>
+      </div>
+    </div>
+    <!--
+    <div class="playlist-section">
+      <h3>Sua Playlist</h3>
+      @for (track of playlist; track track; let i = $index) {
+      <div class="track-row" [class.active]="i === currentIndex" (click)="playPlaylist(i)">
+        <span>{{ track }}</span>
+        @if (i === currentIndex && isPlaying) { <small>Tocando</small> }
+      </div>
+      }
+    </div>
+-->
+
+    <!-- PAINEL RETRÁTIL -->
+    <div class="side-playlist" [class.open]="isPlaylistOpen">
+      <div class="blur-bg"></div> <!-- Div auxiliar para o efeito -->
+      <div class="playlist-content">
+      <h3>Sua Fila</h3>
+      <div class="scroll-area">
+        @for (song of songs; track song.id; let i = $index) {
+        <div class="track-row" [class.active]="i === currentIndex" (click)="playPlaylist(i)">
+          <img [src]="getAlbumArt(song)" class="mini-cover">
+          <div class="text">
+            <span class="t-title">{{ song.title || song.filename }}</span>
+            <span class="t-artist">{{ song.artist }}</span>
+          </div>
+        </div>
+        }
+      </div>
+      </div>
+    </div>
+
+  </div>

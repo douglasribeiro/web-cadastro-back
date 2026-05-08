@@ -1,0 +1,13 @@
+.lista-container { max-width: 1100px; margin: 2rem auto; font-family: sans-serif; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.table-responsive { background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { background: #f8fafc; padding: 15px; color: #64748b; font-size: 0.85rem; text-transform: uppercase; }
+td { padding: 15px; border-top: 1px solid #f1f5f9; font-size: 0.95rem; }
+
+.badge { background: #e0e7ff; color: #4338ca; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+.btn-novo { background: #4f46e5; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
+.btn-edit, .btn-delete { background: none; border: none; cursor: pointer; font-size: 1.2rem; margin-right: 5px; }
+
+.empty-msg { text-align: center; padding: 40px; color: #94a3b8; }

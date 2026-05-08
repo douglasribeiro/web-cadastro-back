@@ -1,0 +1,24 @@
+.form-container { max-width: 950px; margin: 2rem auto; font-family: 'Inter', sans-serif; }
+.musica-card { background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; padding: 20px; }
+.form-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px; }
+
+.layout-grid { display: grid; grid-template-columns: 260px 1fr; gap: 30px; }
+.meta-column { display: flex; flex-direction: column; gap: 20px; }
+.cover-art { width: 260px; height: 260px; border-radius: 8px; background: #f8fafc; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cover-art img { width: 100%; height: 100%; object-fit: cover; }
+.art-placeholder { font-size: 60px; color: #94a3b8; }
+
+.data-column { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.input-row { display: flex; flex-direction: column; gap: 5px; }
+.input-row.full { grid-column: span 2; }
+.input-row label { font-size: 13px; font-weight: 700; color: #475569; }
+.input-row input { padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; }
+.readonly { background: #f1f5f9; cursor: not-allowed; }
+
+.file-input-wrapper { position: relative; overflow: hidden; }
+.btn-import { background: #6366f1; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; }
+.file-input-wrapper input { position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+
+.btn-submit { background: #10b981; color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.btn-submit:hover:not(:disabled) { background: #059669; }
+.btn-submit:disabled { background: #94a3b8; opacity: 0.6; }

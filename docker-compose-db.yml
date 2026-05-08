@@ -1,0 +1,23 @@
+# docker-compose -f docker-compose-db.yml up -d
+
+services:
+  musica-db:
+    image: mysql:9.3.0
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: radio_db
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db_data:/var/lib/mysql
+    networks:
+      - musica-network
+
+networks:
+  musica-network:
+    name: musica-network
+    driver: bridge

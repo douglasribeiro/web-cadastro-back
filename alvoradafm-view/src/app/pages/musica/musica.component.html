@@ -1,0 +1,100 @@
+<div class="form-container">
+  @if (isBrowser()) {
+    <div class="musica-card">
+      <header class="form-header">
+        <h2>Cadastro de Faixa Musical</h2>
+        <div class="file-input-wrapper">
+          <button type="button" class="btn-import">📁 Ler Arquivo de Áudio</button>
+          <input type="file" (change)="onArquivoSelecionado($event)" accept="audio/*" [disabled]="carregando()">
+        </div>
+      </header>
+
+      <form [formGroup]="musicaForm" (ngSubmit)="salvar()" class="musica-form">
+
+        <div class="layout-grid">
+          <!-- Coluna 1: Capa e Tempos -->
+          <aside class="meta-column">
+            <div class="cover-art">
+              @if (capaPreview()) {
+                <img [src]="capaPreview()" alt="Capa do Álbum">
+              } @else {
+                <div class="art-placeholder">🎵</div>
+              }
+            </div>
+
+            <div class="time-info">
+              <div class="field">
+                <label>Duração Total</label>
+                <input [value]="formatarDuracao(musicaForm.value.duracaoSegundos)" readonly class="readonly">
+              </div>
+              <div class="field">
+                <label>Tempo de Intro (s)</label>
+                <input type="number" formControlName="introducao">
+              </div>
+              <div class="field">
+                <label>Intervalo (ms)</label>
+                <input type="number" formControlName="intervalo">
+              </div>
+            </div>
+          </aside>
+
+          <!-- Coluna 2: Dados da Música -->
+          <section class="data-column">
+            <div class="input-row full">
+              <label>Título da Música</label>
+              <input type="text" formControlName="nome" placeholder="Ex: Bohemian Rhapsody">
+            </div>
+
+            <div class="input-row">
+              <label>Artista / Intérprete</label>
+              <input type="text" formControlName="interprete">
+            </div>
+
+            <div class="input-row">
+              <label>Álbum</label>
+              <input type="text" formControlName="album">
+            </div>
+
+            <div class="input-row">
+              <label>Compositor</label>
+              <input type="text" formControlName="compositor">
+            </div>
+
+            <div class="input-row">
+              <label>Gravadora</label>
+              <input type="text" formControlName="gravadora">
+            </div>
+
+            <div class="input-row">
+              <label>Gênero</label>
+              <input type="text" formControlName="genero">
+            </div>
+
+            <div class="input-row">
+              <label>Ano de Lançamento</label>
+              <input type="text" formControlName="lancamento">
+            </div>
+
+            <div class="input-row full">
+              <label>URL do Arquivo</label>
+              <input type="text" formControlName="ArquivoUrl">
+            </div>
+
+            <div class="input-row full">
+              <label>Caminho Interno (Local)</label>
+              <input type="text" formControlName="caminhoArquivo" readonly class="readonly">
+            </div>
+          </section>
+        </div>
+
+        <footer class="form-footer">
+          <button type="submit" [disabled]="musicaForm.invalid || carregando()" class="btn-submit">
+            {{ carregando() ? 'Processando Áudio...' : '💾 Salvar no Banco de Dados' }}
+          </button>
+        </footer>
+      </form>
+    </div>
+  } @else {
+    <div class="ssr-loading">Iniciando ambiente do navegador...</div>
+  }
+</div>

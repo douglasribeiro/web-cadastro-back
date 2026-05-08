@@ -1,0 +1,52 @@
+<mat-sidenav-container class="full-height">
+
+  <!-- Mudamos o mode para 'over' e vinculamos o [opened] ao estado -->
+  <mat-sidenav #drawer mode="over" [opened]="isMenuCollapsed" (closed)="isMenuCollapsed = false">
+    <div class="menu-header">
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <span class="menu-title">Menu</span>
+    </div>
+
+    <mat-nav-list>
+      @for (mod of modulos; track mod.label) {
+        <a mat-list-item (click)="selecionarModulo(mod); toggleMenu()">
+          <mat-icon matListItemIcon>{{mod.icon}}</mat-icon>
+          {{mod.label}}
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Barra de navegação com o botão para abrir o menu -->
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="tab-bar">
+
+      <!-- Botão que fica fixo para abrir o menu -->
+      <button mat-icon-button (click)="toggleMenu()" class="menu-trigger">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      @for (tab of tabsAbertas; track tab.label; let i = $index) {
+        <a mat-tab-link [active]="abaAtiva === tab" (click)="abaAtiva = tab">
+          {{tab.label}}
+          <mat-icon class="close-btn" (click)="fecharAba(i, $event)">close</mat-icon>
+        </a>
+      }
+    </nav>
+
+    <mat-tab-nav-panel #tabPanel>
+      <div class="content-wrapper">
+        @if (abaAtiva) {
+          <ng-container *ngComponentOutlet="abaAtiva.component"></ng-container>
+        } @else {
+          <div class="empty-state">
+            <mat-icon color="primary" style="font-size: 48px; width: 48px; height: 48px;">menu_open</mat-icon>
+            <p>Clique no menu para selecionar um módulo.</p>
+          </div>
+        }
+      </div>
+    </mat-tab-nav-panel>
+  </mat-sidenav-content>
+</mat-sidenav-container>

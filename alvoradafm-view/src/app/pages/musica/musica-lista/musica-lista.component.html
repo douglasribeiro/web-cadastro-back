@@ -1,0 +1,44 @@
+<div class="lista-container">
+  <div class="header">
+    <h2>Biblioteca Musical</h2>
+    <button class="btn-novo">Add Nova Música</button>
+  </div>
+
+  @if (carregando()) {
+    <div class="loader">Buscando músicas no servidor...</div>
+  } @else {
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Artista</th>
+            <th>Álbum</th>
+            <th>Gênero</th>
+            <th>Duração</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (m of musicas(); track m.nome) {
+            <tr>
+              <td><strong>{{ m.nome }}</strong></td>
+              <td>{{ m.interprete }}</td>
+              <td>{{ m.album }}</td>
+              <td><span class="badge">{{ m.genero }}</span></td>
+              <td>{{ formatarDuracao(m.duracaoSegundos) }}</td>
+              <td>
+                <button class="btn-edit">✏️</button>
+                <button class="btn-delete">🗑️</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-msg">Nenhuma música cadastrada ainda.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
