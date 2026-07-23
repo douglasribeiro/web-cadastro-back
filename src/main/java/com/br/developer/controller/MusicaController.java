@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +63,8 @@ public class MusicaController extends BaseController<MusicaDto, MusicaService> {
 
 	@Override
 	//@Auditavel(operacao = "ALTERAR_MUSICA")
-	public ResponseEntity<ApiResponse<MusicaDto>>  update(@PathVariable Long id, @RequestBody MusicaDto dto) {
+	@PatchMapping("/{id}")						 
+	public ResponseEntity<ApiResponse<MusicaDto>>  update(@PathVariable("id") Long id, @RequestBody MusicaDto dto) {
 		logger.info("Serviço alternativo que altera registro.");
 		MusicaRequest musicaRequest = MusicaRequest.builder()
 				.id(id)
