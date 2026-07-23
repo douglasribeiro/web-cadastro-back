@@ -39,7 +39,7 @@ public abstract class BaseController<D, S extends BaseService<?, D>> {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<D>> delete(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<D>> delete(@PathVariable("id") Long id){
     	service.delete(id);
     	HttpStatusCode meuStatus = HttpStatusCode.valueOf(288);
     	return new ResponseEntity<>(ApiResponse.delete(null, "Registro " + id + " excluido com sucesso."), meuStatus);
